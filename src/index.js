@@ -4,13 +4,24 @@ import {IntlProvider} from 'react-intl';
 import localeEsMessages from "./locales/es";
 import localeEnMessages from "./locales/en";
 import JobsList from "./components/jobslist";
-
-ReactDOM.render(
-    // <IntlProvider locale="en-US" messages= {localeEnMessages}>
-
-    <IntlProvider locale="es-ES" messages= {localeEsMessages}>
+import { useState } from "react";
 
 
-    <JobsList locale="en-US"/>
-    </IntlProvider>, document.getElementById("root")
-);
+let locale = "en-US";
+if (navigator.language.includes("es")) {
+  locale = "es-ES";
+
+}
+
+if (locale ==="en-US")
+    ReactDOM.render(
+        <IntlProvider locale={locale} messages={localeEnMessages} >
+        <JobsList/>
+        </IntlProvider>, document.getElementById("root")
+    );
+else
+    ReactDOM.render(
+        <IntlProvider locale={locale} messages={localeEsMessages} >
+        <JobsList/>
+        </IntlProvider>, document.getElementById("root")
+    );

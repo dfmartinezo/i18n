@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import Job from "./job";
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl, IntlProvider} from 'react-intl';
 
 
-const JobsList = (locale) => {
-  const fondo = "thead-dark"
-  if (locale==="es-ES")
-    fondo = "thead-light"
+
+
+const JobsList = () => {
+
+  let locale = "en-US";
+  let fondo = "table-dark"
+  if (navigator.language.includes("es")) {
+    fondo = "table-light"
+  }
+  
 
   const [offers] = useState([
     {
@@ -39,27 +45,27 @@ const JobsList = (locale) => {
   ]);
   
   return (
-    <div>
-      <table className="table">
-        <thead className={fondo}>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col"><FormattedMessage id="Position"/></th>
-            <th scope="col"><FormattedMessage id="Company"/></th>
-            <th scope="col"><FormattedMessage id="Salary"/></th>
-            <th scope="col"><FormattedMessage id="City"/></th>
-            <th scope="col"><FormattedMessage id="PublicationDate"/></th>
-            <th scope="col"><FormattedMessage id="Views"/></th>
-          </tr>
-        </thead>
-        <tbody>
-          {console.log("Offers", offers)}
-          {offers.map((e, i) => (
-            <Job key={i} offer={e} />
-          ))}
-        </tbody>
-      </table>
-    </div>
+      <div>
+        <table className="table">
+          <thead className={fondo}>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"><FormattedMessage id="Position"/></th>
+              <th scope="col"><FormattedMessage id="Company"/></th>
+              <th scope="col"><FormattedMessage id="Salary"/></th>
+              <th scope="col"><FormattedMessage id="City"/></th>
+              <th scope="col"><FormattedMessage id="PublicationDate"/></th>
+              <th scope="col"><FormattedMessage id="Views"/></th>
+            </tr>
+          </thead>
+          <tbody>
+            {console.log("Offers", offers)}
+            {offers.map((e, i) => (
+              <Job key={i} offer={e} />
+            ))}
+          </tbody>
+        </table>
+      </div>
   );
 };
 
